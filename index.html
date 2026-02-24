@@ -291,22 +291,66 @@
     opacity: 0.55;
   }
 
+
+  /* Force color printing on all devices */
+  .label-top-bar,
+  .label-bottom-bar,
+  .lf-key,
+  .label-material,
+  .lf-val.site-name {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
   /* ── PRINT ── */
   .print-preview-label { display: none; }
 
   @media print {
-    @page { size: 6in 4in; margin: 0; }
-    body * { visibility: hidden !important; }
-    .print-preview-label { display: block !important; }
-    .print-preview-label,
-    .print-preview-label * { visibility: visible !important; }
+    @page {
+      size: 6in 4in;
+      margin: 0;
+    }
+
+    html, body {
+      width: 6in !important;
+      height: 4in !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      background: #fff !important;
+    }
+
+    body * {
+      visibility: hidden !important;
+      display: none !important;
+    }
+
     .print-preview-label {
+      display: block !important;
+      visibility: visible !important;
       position: fixed !important;
       top: 0 !important;
       left: 0 !important;
       width: 6in !important;
       height: 4in !important;
       overflow: hidden !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    .print-preview-label * {
+      visibility: visible !important;
+      display: revert !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    .label-wrap {
+      width: 6in !important;
+      height: 4in !important;
     }
   }
 </style>
